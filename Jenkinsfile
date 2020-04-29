@@ -3,28 +3,21 @@ def output
 pipeline {
     
    agent any
+   
    tools {
-	   go { 'go-1.2' }
+	   go { 'go-1.14' }
    }
 
    stages {
-      stage('Build') {
-         steps {
-             script {
-                 sh 'go build' 
-             }
-         }
-      }
-   }      
-} 
-    
-   
-  
-
-
-
-
-
-
-
-
+	   stage('build') {
+		   steps {
+			   sh 'go build'
+		   }
+	   }
+	   stage('Publish artifact') {
+		   steps {
+			   archiveArtifacts 'jenkins-multi_go'
+		   }
+	   }
+   }
+}
