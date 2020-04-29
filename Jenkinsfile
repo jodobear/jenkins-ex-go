@@ -16,7 +16,7 @@ pipeline {
 	   }
 	   stage('Publish artifact') {
 		   steps {
-			   archiveArtifacts 'jenkins-multi_go'
+			   archiveArtifacts 'go-artifact'
 		   }
 	   }
    }
