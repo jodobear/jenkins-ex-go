@@ -2,45 +2,22 @@ def output
 
 pipeline {
 
-    agent { docker { image 'golang:alpine' } }
+  agent { docker { image 'golang:alpine' } }
 
-    environment {
-        registry = "shahnishit/go-artifact"
-        registryCredentials = 'docker-hub'
+  stages {
+    stage('build') {
+      environment {
+        XDG_CACHE_HOME = '/tmp/.cache'
+      }
+      steps {
+        sh 'go build -o go-artifact'
+        sh 'chmod ug+x go-artifact'
+      }
     }
-
-    stages {
-        stage('build') {
-            environment {
-                XDG_CACHE_HOME = '/tmp/.cache'
-            }
-            steps {
-                sh 'go build -o go-artifact'
-            }
-        }
-        stage('Publish artifact') {
-            steps {
-                archiveArtifacts 'go-artifact'
-            }
-        }
-        stage('Build docker image') {
-            steps {
-                script {
-                    go_artifact_image = docker.build("shahnishit/jenkins-go-artifact")
-
-                }
-            }
-        }
-        stage('Publish docker image') {
-            steps {
-                script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', 'docker-hub' )
-                    {
-                        go_artifact_image.push("${env.BUILD_NUMBER}")
-                    }
-
-                }
-            }
-        }
+    stage('Publish artifact') {
+      steps {
+        archiveArtifacts 'go-artifact'
+      }
     }
+  }
 }
