@@ -24,20 +24,12 @@ pipeline {
             }
         }
         stage('Build docker image') {
-            steps {
-                script {
-                go_artifact_image = docker.build("${registry}:${env.BUILD_ID}")
-                }
-            }
+                go_artifact_image = docker.build("shahnishit/jenkins-go-artifact")
         }
         stage('Publish docker image') {
-            steps {
-                script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials )
-                    {
-                        go_artifact_image.push()
-                    }
-                }
+            docker.withRegistry( 'https://registry.hub.docker.com', 'docker-hub' )
+            {
+                go_artifact_image.push("${env.BUILD_NUMBER}")
             }
         }
     }
