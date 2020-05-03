@@ -2,7 +2,7 @@ def output
 
 pipeline {
 
-    agent { docker { 'golang:alpine' } }
+    agent { docker { image 'golang:alpine' } }
 
     stages {
         stage('build') {
