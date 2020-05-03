@@ -5,7 +5,7 @@ pipeline {
     agent { docker { image 'golang:alpine' } }
 
     environment {
-        registry = "shahnishit/jenkins_go_artifact"
+        registry = "shahnishit/go-artifact"
         registryCredentials = 'docker-hub'
     }
 
