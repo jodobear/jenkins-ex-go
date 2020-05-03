@@ -21,9 +21,7 @@ pipeline {
     }
     stage('Build docker image') {
       steps {
-        script {
-          go_artifact_image = docker.build("shahnishit/jenkins-go-artifact")
-        }
+        sh docker build shahnishit/jenkins-go-artifact:latest
       }
     }
     stage('Publish docker image') {
