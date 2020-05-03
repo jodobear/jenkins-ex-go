@@ -1,0 +1,36 @@
+def output
+
+pipeline {
+
+  agent any
+
+  environment {
+    registry = "shahnishit/jenkins_go"
+    registryCredentials = 'docker-hub'
+  }
+
+  stages {
+    stage('Copy artifact') {
+      steps {
+        copyArtifacts filter: 'go-artifact', fingerprintArtifacts: true, projectName: 'go-artifact', selector: lastSuccessful()
+      }
+    }
+    stage('Build docker image') {
+      steps {
+        script {
+          go_artifact_image = docker.build("shahnishit/jenkins-go-artifact")
+        }
+      }
+    }
+    stage('Publish docker image') {
+      steps {
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', 'docker-hub' )
+          {
+            go_artifact_image.push("${env.BUILD_NUMBER}")
+          }
+        }
+      }
+    }
+  }
+}
