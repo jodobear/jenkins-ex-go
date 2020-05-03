@@ -25,7 +25,9 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
+                step {
                 go_artifact_image = docker.build("${registry}:${env.BUILD_ID}")
+                }
             }
         }
         stage('Publish docker image') {
