@@ -19,5 +19,22 @@ pipeline {
         archiveArtifacts 'go-artifact'
       }
     }
+    stage('Build docker image') {
+      steps {
+        script {
+          go_artifact_image = docker.build("shahnishit/jenkins-go-artifact")
+        }
+      }
+    }
+    stage('Publish docker image') {
+      steps {
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', 'docker-hub' )
+          {
+            go_artifact_image.push("${env.BUILD_NUMBER}")
+          }
+        }
+      }
+    }
   }
 }
