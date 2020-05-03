@@ -4,6 +4,11 @@ pipeline {
 
     agent { docker { image 'golang:alpine' } }
 
+    environment {
+        registry = "shahnishit/jenkins-go-docker"
+        registryCredentials = "docker-hub"
+    }
+
     stages {
         stage('build') {
             environment {
@@ -16,6 +21,21 @@ pipeline {
         stage('Publish artifact') {
             steps {
                 archiveArtifacts 'go-artifact'
+            }
+        }
+        stage('Build docker image') {
+            steps {
+                go-artifact-image = docker.build("${registry}:${env.BUILD_ID}")
+            }
+        }
+        stage('Publish docker image') {
+            steps {
+                step {
+                    docker.withRegistry( '', registryCredentials )
+                    {
+                        go-artifact-image.push()
+                    }
+                }
             }
         }
     }
