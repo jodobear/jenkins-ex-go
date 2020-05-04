@@ -22,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Server started")
+	fmt.Println("Server started differently..")
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":9090", nil))
 }
