@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh 'go test -o go-artifact'
+                sh 'CGO_ENABLED=0 go test -o go-artifact'
             }
         }
     }
