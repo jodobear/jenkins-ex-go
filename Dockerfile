@@ -1,4 +1,4 @@
-FROM golang:1.14.2-buster
+FROM golang:alpine
 
 WORKDIR /usr/app
 
