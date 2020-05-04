@@ -10,7 +10,7 @@ pipeline {
     environment {
 		XDG_CACHE_HOME = '/tmp/cache'
         CGO_ENABLED = 0
-
+    }
     stages {
 		stage('test') {
             steps {
