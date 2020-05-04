@@ -7,11 +7,19 @@ pipeline {
     tools {
         go { 'go-1.14' }
     }
+    environment {
+		XDG_CACHE_HOME = '/tmp/cache'
+        CGO_ENABLED = 0
 
     stages {
+		stage('test') {
+            steps {
+                sh 'go test'
+            }
+        }
         stage('build') {
             steps {
-                sh 'CGO_ENABLED=0 go build -o go-artifact'
+                sh 'go build -o go-artifact'
             }
         }
         stage('Publish artifact') {
