@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'go build -o go-artifact'
+                sh 'CGO_ENABLED=0 go build -o go-artifact'
             }
         }
         stage('Publish artifact') {
