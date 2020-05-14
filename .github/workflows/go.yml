@@ -50,4 +50,4 @@ jobs:
         username: ${{ secrets.DOCKER_UNAME }}
         password: ${{ secrets.DOCKER_PASSWD }}
         repository: shahnishit/gh-actions
-      tags: latest
+        tags: latest
