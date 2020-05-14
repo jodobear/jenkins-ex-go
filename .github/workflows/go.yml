@@ -43,3 +43,17 @@ jobs:
         name: go-artifact
         # A file, directory or wildcard pattern that describes what to upload
         path: .
+        
+    - name: Docker Action
+      uses: zenato/docker-action@v1.0.0
+      with:
+        # Registry username
+        username: $DOCKER_UNAME
+        # Registry password
+        password: $DOCKER_PASSWD
+        # Repository on registry
+        repository: shahnishit
+        # Registry hostname
+        registry: gh-actions
+        # Image tag
+        tag: test
