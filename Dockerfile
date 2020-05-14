@@ -2,7 +2,7 @@ FROM golang:alpine
 
 WORKDIR /usr/app
 
-COPY https://github.com/jodobear/jenkins-ex-go/suites/682903871/artifacts/6326778 /usr/app
+# COPY ./go-artifact /usr/app
 # ADD go-artifact .
 
 # RUN go get -u -v -f all
