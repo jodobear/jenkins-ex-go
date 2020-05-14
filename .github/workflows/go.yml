@@ -31,7 +31,7 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v .
+      run: GOOS=linux CGO_ENABLED=0 go build -v .
 
     - name: Test
       run: go test -v .
