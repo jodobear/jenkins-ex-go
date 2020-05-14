@@ -30,5 +30,5 @@ func main() {
 	fmt.Println("Server started differently..")
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":9090", nil))
-  http.Handle("/metrics", promhttp.Handler())
+  //  http.Handle("/metrics", promhttp.Handler())
 }
