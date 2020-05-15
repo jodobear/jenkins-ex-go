@@ -56,10 +56,10 @@ jobs:
           name: go-artifact
           path: .
 
-    - name: Create Image and Push
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_UNAME }}
-        password: ${{ secrets.DOCKER_PASSWD }}
-        repository: shahnishit/gh-actions
-        tags: latest
+      - name: Create Image and Push
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_UNAME }}
+          password: ${{ secrets.DOCKER_PASSWD }}
+          repository: shahnishit/gh-actions
+          tags: latest
