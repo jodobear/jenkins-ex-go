@@ -31,7 +31,7 @@ jobs:
         fi
 
     - name: Build
-      run: GOOS=linux CGO_ENABLED=0 go build -v .
+      run: GOOS=linux CGO_ENABLED=0 go build -o go-artifact -v .
 
     - name: Test
       run: go test -v .
