@@ -53,7 +53,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v1
         with:
-          name: download
+          name: go-artifact
           path: .
 
     - name: Create Image and Push
